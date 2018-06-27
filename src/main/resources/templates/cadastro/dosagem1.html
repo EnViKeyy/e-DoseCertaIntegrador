@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <h1>Cadastro de Animais</h1>
+        <form method="post" >
+            Peso: <input type="number" value="" name="peso"/>
+            <!--Veterinário: <input type="number" value="" name="veterinarioId"/>-->
+            Veterinário:
+            <select name="veterinarioId" >
+                <option th:each="vet : ${vets}" th:value="${vet.veterinarioId}" th:text="${vet.nome}" ></option>
+            </select>
+
+
+<!--            Dosagem: <input type="number" value="" name="dosagem"/>-->
+
+            Animal:
+            <select name="animalId" >
+                <option>Selecione um animal</option>
+                <option th:each="animal : ${animais}" th:value="${animal.animalId}" th:text="${animal.nome}" ></option>
+            </select>
+
+            <table>
+            <tbody>
+                <tr th:each="animal : ${animais}" >
+                    <td><a th:href="${#mvc.url('DC#farmacos').arg(0, animal.animalId).build()}" ><span th:text="${animal.nome}" ></span> </a></td>
+                </tr>
+            </tbody>
+            </table>
+
+            Farmaco:
+            <select name="farmacoId" >
+                <option th:each="farmaco : ${farmacos}" th:value="${farmaco.farmacoId}" th:text="${farmaco.nome}" ></option>
+            </select>
+
+            FarmacoEspecie:
+            <select name="dosagem">
+                <!--<option>Selecione um farmaco</option>-->
+                <option th:each="farmacoEsp : ${farmacosEsp}" th:text="${farmacoEsp.doseMaxima}" ></option>
+            </select>
+
+            <button type="submit">Cadastrar</button>
+        </form>
+    </body>
+</html>
