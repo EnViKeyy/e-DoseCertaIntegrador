@@ -179,65 +179,55 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <h2>Consultar Animal</h2>
                         </div>
 
-<!--                        <div class="forms-grids">
-                            <div class="w3agile-validation">
-                                <div class="panel panel-widget agile-validation">
-                                    <div class="my-div">
-                                        <form method="post" action="#" class="valida" autocomplete="off" novalidate="novalidate">
-                                            <div class="input-info">
-                                                <h3>Informe os Dados:</h3>
-                                            </div>
-                                            <label for="field-1">Nome: (obrigatorio)&nbsp;<span class="at-required-highlight"></span></label>
-                                            <div class="form-group">
-                                                <input type="text" name="field-1" id="field-1" required="true" class="form-control"/>
-                                            </div>
-                                            <p>
-                                                <input type="submit" name="sub-1" value="Consultar" class="btn btn-primary"/>
-                                                <input type="reset" name="res-1" id="res-1" value="Resetar" class="btn btn-danger"/>
-                                            </p>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>-->
+                        <!--                        <div class="forms-grids">
+                                                    <div class="w3agile-validation">
+                                                        <div class="panel panel-widget agile-validation">
+                                                            <div class="my-div">
+                                                                <form method="post" action="#" class="valida" autocomplete="off" novalidate="novalidate">
+                                                                    <div class="input-info">
+                                                                        <h3>Informe os Dados:</h3>
+                                                                    </div>
+                                                                    <label for="field-1">Nome: (obrigatorio)&nbsp;<span class="at-required-highlight"></span></label>
+                                                                    <div class="form-group">
+                                                                        <input type="text" name="field-1" id="field-1" required="true" class="form-control"/>
+                                                                    </div>
+                                                                    <p>
+                                                                        <input type="submit" name="sub-1" value="Consultar" class="btn btn-primary"/>
+                                                                        <input type="reset" name="res-1" id="res-1" value="Resetar" class="btn btn-danger"/>
+                                                                    </p>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>-->
 
 
-                            <div class="clearfix"> </div>
-                        </div>
-
+                        <div class="clearfix"> </div>
                     </div>
-                    <div class="agile-tables">
-                        <div class="w3l-table-info">
-                            <!--<h3>Dados do Animal</h3>-->
-                            <table id="table">
-                                <thead>
-                                    <tr>
-                                        <th>Nome</th>
-                                        <th>RG</th>
-                                        <th>Espécie</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr th:each="animal : ${animais}">
-                                        <td><a><span th:text="${animal.nome}"></span></a></td>
-                                        <td><span th:text="${animal.rg}"></span></td>
-                                        <td><span th:text="${animal.especieId}"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>John Stone</td>
-                                        <td>30</td>
-                                        <td>Male</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jane Strip</td>
-                                        <td>29</td>
-                                        <td>Female</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <!-- //validation -->
+
                 </div>
+                <div class="agile-tables">
+                    <div class="w3l-table-info" >
+                        <!--<h3>Dados do Animal</h3>-->
+                        <table id="table">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>RG</th>
+                                    <th>Espécie</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="animalEsp : ${animalEsps}" >
+                                    <td><span th:text="${animalEsp.nome}"></span></td>
+                                    <td><span th:text="${animalEsp.rg}"></span></td>
+                                    <td><span th:text="${animalEsp.especie}"></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- //validation -->
+            </div>
             <!--</div>-->
             <!-- footer -->
             <div class="footer">
