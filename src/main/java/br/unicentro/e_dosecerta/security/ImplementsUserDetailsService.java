@@ -15,12 +15,16 @@ public class ImplementsUserDetailsService implements UserDetailsService {
     private VeterinarioRepository veterinarioRpt;
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Veterinario veterinario = veterinarioRpt.findByEmail(email);
+    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+        Veterinario vetEmail = veterinarioRpt.findByEmail(login);
+        Veterinario vetCrmv = veterinarioRpt.findByCrmv(login);
 
-        if (veterinario == null) {
+        if (vetEmail != null) {
+            return vetEmail;
+        } else if (vetCrmv != null) {
+            return vetCrmv;
+        } else {
             throw new UsernameNotFoundException("Veterinario não encontrado!");
         }
-        return veterinario;
     }
 }
