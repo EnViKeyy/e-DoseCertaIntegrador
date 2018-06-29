@@ -9,11 +9,9 @@ import br.unicentro.e_dosecerta.repository.AnimalRepository;
 import br.unicentro.e_dosecerta.repository.DosagemRepository;
 import br.unicentro.e_dosecerta.repository.FarmacoEspecieRepository;
 import br.unicentro.e_dosecerta.repository.FarmacoRepository;
-import static java.lang.System.console;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,8 +22,6 @@ public class DosagemController {
     @Autowired
     private DosagemRepository dosagemRpt;
 
-//    @Autowired
-//    private VeterinarioRepository vr;
     @Autowired
     private AnimalRepository animalRpt;
 
@@ -85,17 +81,32 @@ public class DosagemController {
         dose = (dosagem.getPeso() * farmacoEsp.getDoseMaxima()) / farmaco.getConcentracao();
         dosagem.setDosagem(dose);
         dosagemRpt.save(dosagem);
-        System.out.println(dosagem.getDosagem());
 
+        Dosagem dose2 = new Dosagem();
+
+        dose2.setAnimalId(dosagem.getAnimalId());
+        dose2.setData(new Date());
+        dose2.setDosagem(0);
         dose = (dosagem.getPeso() * farmacoEsp.getDoseMinima()) / farmaco.getConcentracao();
-        dosagem.setDosagem(dose);
-        dosagemRpt.save(dosagem);
-        System.out.println(dosagem.getDosagem());
+        dose2.setDosagem(dose);
+        dose2.setDosagemId(dosagem.getDosagemId() + 1);
+        dose2.setFarmacoId(dosagem.getFarmacoId());
+        dose2.setPeso(dosagem.getPeso());
+        dose2.setVeterinarioId(dosagem.getVeterinarioId());
+        dosagemRpt.save(dose2);
 
+        dose2 = new Dosagem();
+        dose2.setAnimalId(dosagem.getAnimalId());
+        dose2.setData(new Date());
+        dose2.setDosagem(0);
         dose = (dosagem.getPeso() * farmacoEsp.getDoseMedia()) / farmaco.getConcentracao();
-        dosagem.setDosagem(dose);
-        dosagemRpt.save(dosagem);
-        System.out.println(dosagem.getDosagem());
+        dose2.setDosagem(dose);
+        dose2.setDosagemId(dosagem.getDosagemId() + 2);
+        dose2.setFarmacoId(dosagem.getFarmacoId());
+        dose2.setPeso(dosagem.getPeso());
+        dose2.setVeterinarioId(dosagem.getVeterinarioId());
+        dosagemRpt.save(dose2);
+
         return "redirect:/cadastro/dosagem";
     }
 }
