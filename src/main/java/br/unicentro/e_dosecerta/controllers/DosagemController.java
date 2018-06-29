@@ -4,11 +4,13 @@ import br.unicentro.e_dosecerta.models.Animal;
 import br.unicentro.e_dosecerta.models.Dosagem;
 import br.unicentro.e_dosecerta.models.Farmaco;
 import br.unicentro.e_dosecerta.models.FarmacoEspecie;
+import br.unicentro.e_dosecerta.models.FarmacoEspeciePK;
 import br.unicentro.e_dosecerta.repository.AnimalRepository;
 import br.unicentro.e_dosecerta.repository.DosagemRepository;
 import br.unicentro.e_dosecerta.repository.FarmacoEspecieRepository;
 import br.unicentro.e_dosecerta.repository.FarmacoRepository;
 import static java.lang.System.console;
+import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +26,6 @@ public class DosagemController {
 
 //    @Autowired
 //    private VeterinarioRepository vr;
-
     @Autowired
     private AnimalRepository animalRpt;
 
@@ -43,10 +44,6 @@ public class DosagemController {
 
         Iterable<Farmaco> farmacos = farmacoRpt.findAll();
         mv.addObject("farmacos", farmacos);
-//        Iterable<Veterinario> vets = vr.findAll();
-//        mv.addObject("vets", vets);
-//        Iterable<FarmacoEspecie> farmacosEspecies = farmacoEspRpt.findAll();
-//        mv.addObject("farmacosEspecies", farmacosEspecies);
 
         return mv;
     }
@@ -69,10 +66,36 @@ public class DosagemController {
 //
 //        return mv;
 //    }
-
+    
     @RequestMapping(value = "/cadastro/dosagem", method = RequestMethod.POST)
     private String form(Dosagem dosagem) {
+        Animal animal = animalRpt.findByAnimalId(dosagem.getAnimalId());
+        Farmaco farmaco = farmacoRpt.findByFarmacoId(dosagem.getFarmacoId());
+
+        FarmacoEspeciePK farmacoEspPK = new FarmacoEspeciePK();
+        farmacoEspPK.setEspecieId(animal.getEspecieId());
+        farmacoEspPK.setFarmacoId(dosagem.getFarmacoId());
+        FarmacoEspecie farmacoEsp = farmacoEspRpt.findByEspecieFarmacoId(farmacoEspPK);
+
+        dosagem.setData(new Date());
+        dosagem.setVeterinarioId(1);
+
+        Float dose;
+
+        dose = (dosagem.getPeso() * farmacoEsp.getDoseMaxima()) / farmaco.getConcentracao();
+        dosagem.setDosagem(dose);
         dosagemRpt.save(dosagem);
+        System.out.println(dosagem.getDosagem());
+
+        dose = (dosagem.getPeso() * farmacoEsp.getDoseMinima()) / farmaco.getConcentracao();
+        dosagem.setDosagem(dose);
+        dosagemRpt.save(dosagem);
+        System.out.println(dosagem.getDosagem());
+
+        dose = (dosagem.getPeso() * farmacoEsp.getDoseMedia()) / farmaco.getConcentracao();
+        dosagem.setDosagem(dose);
+        dosagemRpt.save(dosagem);
+        System.out.println(dosagem.getDosagem());
         return "redirect:/cadastro/dosagem";
     }
 }

@@ -151,32 +151,32 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <div class="w3agile-validation">
                                 <div class="panel panel-widget agile-validation">
                                     <div class="my-div">
-                                        <form method="post" action="#" class="valida" autocomplete="off" novalidate="novalidate">
+                                        <form method="post" action="/cadastro/dosagem" class="valida" autocomplete="off" novalidate="novalidate">
 
                                             <div class="input-info">
                                                 <h3>Informe os Dados:</h3>
                                             </div>
 
-                                            <label for="field-1">animal: &nbsp;<span class="at-required-highlight"></span></label>
+                                            <label for="animalId">animal: &nbsp;<span class="at-required-highlight"></span></label>
                                             <div class="form-group">
-                                                <select name="field-1" id="field-1" required="true" class="form-control">
+                                                <select name="animalId" id="animalId" required="true" class="form-control">
                                                     <option>Selecione um animal...</option>
                                                     <option th:each="animal : ${animais}" th:value="${animal.animalId}" th:text="${animal.nome}" ></option>
                                                 </select>
                                             </div>
 
-                                            <label for="field-1-3">Peso do animal: &nbsp;<span class="at-required-highlight"></span></label>
+                                            <label for="peso">Peso do animal: &nbsp;<span class="at-required-highlight"></span></label>
                                             <div class="form-group">
-                                                <input type="text" name="field-1-3" id="field-1-3" required="true" 
+                                                <input type="number" name="peso" id="peso" required="true" 
                                                        class="form-control" data-required="Em gramas"/>
                                             </div>
 
                                             <h4>Farmaco:</h4>
 
                                             <div class="form-group">
-                                                <select name="field-2" id="field-2" required="true" class="form-control">
+                                                <select name="farmacoId" id="farmacoId" required="true" class="form-control">
                                                     <option>Selecione um fármaco...</option>
-                                                    <option th:each="farmaco : ${farmacos}" th:value="farmaco.farmacoId" th:text="farmaco.nome" ></option>                                                </select>
+                                                    <option th:each="farmaco : ${farmacos}" th:value="${farmaco.farmacoId}" th:text="${farmaco.nome}" ></option>                                                </select>
                                             </div>
                                             <hr/>
                                             <p><input type="submit" name="sub-1" value="Cadastrar" class="btn btn-primary"/></p>
