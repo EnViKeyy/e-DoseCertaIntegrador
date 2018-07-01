@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -18,12 +16,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Entity
 @Table(name = "animal")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Animal.findAll", query = "SELECT a FROM Animal a")
-    , @NamedQuery(name = "Animal.findByAnimalId", query = "SELECT a FROM Animal a WHERE a.animalId = :animalId")
-    , @NamedQuery(name = "Animal.findByNome", query = "SELECT a FROM Animal a WHERE a.nome = :nome")
-    , @NamedQuery(name = "Animal.findByRg", query = "SELECT a FROM Animal a WHERE a.rg = :rg")
-    , @NamedQuery(name = "Animal.findByEspecieId", query = "SELECT a FROM Animal a WHERE a.especieId = :especieId")})
 public class Animal implements Serializable {
 
     private static final long serialVersionUID = 1L;

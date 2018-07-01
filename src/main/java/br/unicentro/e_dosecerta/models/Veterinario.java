@@ -8,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -21,14 +19,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Entity
 @Table(name = "veterinario")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Veterinario.findAll", query = "SELECT v FROM Veterinario v")
-    , @NamedQuery(name = "Veterinario.findByVeterinarioId", query = "SELECT v FROM Veterinario v WHERE v.veterinarioId = :veterinarioId")
-    , @NamedQuery(name = "Veterinario.findByCrmv", query = "SELECT v FROM Veterinario v WHERE v.crmv = :crmv")
-    , @NamedQuery(name = "Veterinario.findByNome", query = "SELECT v FROM Veterinario v WHERE v.nome = :nome")
-    , @NamedQuery(name = "Veterinario.findByEmail", query = "SELECT v FROM Veterinario v WHERE v.email = :email")
-    , @NamedQuery(name = "Veterinario.findBySenha", query = "SELECT v FROM Veterinario v WHERE v.senha = :senha")})
-public class Veterinario implements UserDetails {
+public class Veterinario implements Serializable, UserDetails {
 
     private static final long serialVersionUID = 1L;
 

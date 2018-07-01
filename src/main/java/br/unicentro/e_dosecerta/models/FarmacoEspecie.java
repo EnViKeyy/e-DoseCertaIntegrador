@@ -5,8 +5,6 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -14,30 +12,23 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "farmaco_especie")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "FarmacoEspecie.findAll", query = "SELECT f FROM FarmacoEspecie f")
-    , @NamedQuery(name = "FarmacoEspecie.findByEspecieId", query = "SELECT f FROM FarmacoEspecie f WHERE f.farmacoEspeciePK.especieId = :especieId")
-    , @NamedQuery(name = "FarmacoEspecie.findByFarmacoId", query = "SELECT f FROM FarmacoEspecie f WHERE f.farmacoEspeciePK.farmacoId = :farmacoId")
-    , @NamedQuery(name = "FarmacoEspecie.findByDoseMaxima", query = "SELECT f FROM FarmacoEspecie f WHERE f.doseMaxima = :doseMaxima")
-    , @NamedQuery(name = "FarmacoEspecie.findByDoseMinima", query = "SELECT f FROM FarmacoEspecie f WHERE f.doseMinima = :doseMinima")
-    , @NamedQuery(name = "FarmacoEspecie.findByDoseMedia", query = "SELECT f FROM FarmacoEspecie f WHERE f.doseMedia = :doseMedia")})
 public class FarmacoEspecie implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @EmbeddedId
     protected FarmacoEspeciePK farmacoEspeciePK;
-    
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "dose_maxima")
     private float doseMaxima;
-    
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "dose_minima")
     private float doseMinima;
-    
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "dose_media")

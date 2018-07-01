@@ -8,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,15 +17,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "dosagem")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Dosagem.findAll", query = "SELECT d FROM Dosagem d")
-    , @NamedQuery(name = "Dosagem.findByDosagemId", query = "SELECT d FROM Dosagem d WHERE d.dosagemId = :dosagemId")
-    , @NamedQuery(name = "Dosagem.findByDosagem", query = "SELECT d FROM Dosagem d WHERE d.dosagem = :dosagem")
-    , @NamedQuery(name = "Dosagem.findByPeso", query = "SELECT d FROM Dosagem d WHERE d.peso = :peso")
-    , @NamedQuery(name = "Dosagem.findByData", query = "SELECT d FROM Dosagem d WHERE d.data = :data")
-    , @NamedQuery(name = "Dosagem.findByAnimalId", query = "SELECT d FROM Dosagem d WHERE d.animalId = :animalId")
-    , @NamedQuery(name = "Dosagem.findByFarmacoId", query = "SELECT d FROM Dosagem d WHERE d.farmacoId = :farmacoId")
-    , @NamedQuery(name = "Dosagem.findByVeterinarioId", query = "SELECT d FROM Dosagem d WHERE d.veterinarioId = :veterinarioId")})
 public class Dosagem implements Serializable {
 
     private static final long serialVersionUID = 1L;

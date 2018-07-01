@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -17,27 +15,22 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "farmaco")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Farmaco.findAll", query = "SELECT f FROM Farmaco f")
-    , @NamedQuery(name = "Farmaco.findByFarmacoId", query = "SELECT f FROM Farmaco f WHERE f.farmacoId = :farmacoId")
-    , @NamedQuery(name = "Farmaco.findByNome", query = "SELECT f FROM Farmaco f WHERE f.nome = :nome")
-    , @NamedQuery(name = "Farmaco.findByConcentracao", query = "SELECT f FROM Farmaco f WHERE f.concentracao = :concentracao")})
 public class Farmaco implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "farmacoid")
     private Integer farmacoId;
-    
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 80)
     @Column(name = "Nome")
     private String nome;
-    
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "Concentracao")
@@ -104,5 +97,5 @@ public class Farmaco implements Serializable {
     public String toString() {
         return "br.unicentro.e_dosecerta.entity.Farmaco[ farmacoId=" + farmacoId + " ]";
     }
-    
+
 }
