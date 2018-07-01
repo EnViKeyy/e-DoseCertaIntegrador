@@ -164,6 +164,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                                     <option th:each="farmaco : ${farmacos}" th:value="${farmaco.farmacoId}" th:text="${farmaco.nome}" ></option>                                                </select>
                                             </div>
 
+                                            <h4>Animal</h4>
                                             <label for="animalId">animal &nbsp;<span class="at-required-highlight"></span></label>
                                             <div class="form-group">
                                                 <select name="animalId" id="animalId" required="true" class="form-control">
@@ -171,13 +172,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                                     <option th:each="animal : ${animais}" th:value="${animal.animalId}" th:text="${animal.nome}" ></option>
                                                 </select>
                                             </div>
-
-                                            <h4>Animal</h4>
-                                            <label for="peso">Peso do animal &nbsp;<span class="at-required-highlight"></span></label>
+ 
+                                           <label for="peso">Peso do animal &nbsp;<span class="at-required-highlight"></span></label>
                                             <div class="form-group">
-                                                <input type="number" name="peso" id="peso" required="true" 
+                                                <input type="text" name="peso" id="peso" required="" 
                                                        class="form-control" data-required="Campo obrigatório!"
-                                                       placeholder="Peso em Kg"/>
+                                                       placeholder="Peso em Kg" pattern="[0-9]*" />
                                             </div>
 
                                             <hr/>
