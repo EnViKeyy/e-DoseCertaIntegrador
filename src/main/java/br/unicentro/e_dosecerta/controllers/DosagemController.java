@@ -9,6 +9,7 @@ import br.unicentro.e_dosecerta.repository.AnimalRepository;
 import br.unicentro.e_dosecerta.repository.DosagemRepository;
 import br.unicentro.e_dosecerta.repository.FarmacoEspecieRepository;
 import br.unicentro.e_dosecerta.repository.FarmacoRepository;
+import br.unicentro.e_dosecerta.util.UserAuthenticated;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -67,6 +68,7 @@ public class DosagemController {
     private String form(Dosagem dosagem) {
         Animal animal = animalRpt.findByAnimalId(dosagem.getAnimalId());
         Farmaco farmaco = farmacoRpt.findByFarmacoId(dosagem.getFarmacoId());
+        UserAuthenticated userAuth = new UserAuthenticated();
 
         FarmacoEspeciePK farmacoEspPK = new FarmacoEspeciePK();
         farmacoEspPK.setEspecieId(animal.getEspecieId());
@@ -74,7 +76,7 @@ public class DosagemController {
         FarmacoEspecie farmacoEsp = farmacoEspRpt.findByEspecieFarmacoId(farmacoEspPK);
 
         dosagem.setData(new Date());
-        dosagem.setVeterinarioId(1);
+        dosagem.setVeterinarioId(userAuth.getVeterinario().getVeterinarioId());
 
         Float dose;
 
