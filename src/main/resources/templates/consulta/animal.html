@@ -36,8 +36,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     return false;
                 }
 
-
-
                 $('#toggle').click(function () {
                     screenfull.toggle($('#container')[0]);
                 });
@@ -218,7 +216,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             </thead>
                             <tbody>
                                 <tr th:each="animalEsp : ${animalEsps}" >
-                                    <td><span th:text="${animalEsp.nome}"></span></td>
+                                    <td><a th:href="${(#mvc.url('AC#detalhesAnimal').arg(0, animalEsp.rg)).build()}"><span th:text="${animalEsp.nome}"></span></a></td>
+                                    <!--<td><span th:text="${animalEsp.nome}"></span></td>-->
                                     <td><span th:text="${animalEsp.rg}"></span></td>
                                     <td><span th:text="${animalEsp.especie}"></span></td>
                                 </tr>
