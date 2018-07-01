@@ -96,7 +96,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             </ul>
             <ul class="logout">
                 <li>
-                    <a href="login.html">
+                    <a href="/logout">
                         <i class="icon-off nav-icon"></i>
                         <span class="nav-text">
                             Logout
@@ -154,10 +154,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                         <form method="post" action="/cadastro/dosagem" class="valida" autocomplete="off" novalidate="novalidate">
 
                                             <div class="input-info">
-                                                <h3>Informe os Dados:</h3>
+                                                <h3>Informe os Dados</h3>
+                                            </div>
+                                            
+                                            <h4>Fármaco</h4>
+                                            <div class="form-group">
+                                                <select name="farmacoId" id="farmacoId" required="true" class="form-control">
+                                                    <option>Selecione um fármaco...</option>
+                                                    <option th:each="farmaco : ${farmacos}" th:value="${farmaco.farmacoId}" th:text="${farmaco.nome}" ></option>                                                </select>
                                             </div>
 
-                                            <label for="animalId">animal: &nbsp;<span class="at-required-highlight"></span></label>
+                                            <label for="animalId">animal &nbsp;<span class="at-required-highlight"></span></label>
                                             <div class="form-group">
                                                 <select name="animalId" id="animalId" required="true" class="form-control">
                                                     <option>Selecione um animal...</option>
@@ -165,19 +172,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                                 </select>
                                             </div>
 
-                                            <label for="peso">Peso do animal: &nbsp;<span class="at-required-highlight"></span></label>
+                                            <h4>Animal</h4>
+                                            <label for="peso">Peso do animal &nbsp;<span class="at-required-highlight"></span></label>
                                             <div class="form-group">
                                                 <input type="number" name="peso" id="peso" required="true" 
-                                                       class="form-control" data-required="Campo obrigatório!"/>
+                                                       class="form-control" data-required="Campo obrigatório!"
+                                                       placeholder="Peso em Kg"/>
                                             </div>
 
-                                            <h4>Farmaco:</h4>
-
-                                            <div class="form-group">
-                                                <select name="farmacoId" id="farmacoId" required="true" class="form-control">
-                                                    <option>Selecione um fármaco...</option>
-                                                    <option th:each="farmaco : ${farmacos}" th:value="${farmaco.farmacoId}" th:text="${farmaco.nome}" ></option>                                                </select>
-                                            </div>
                                             <hr/>
                                             <p><input type="submit" name="sub-1" value="Cadastrar" class="btn btn-primary"/></p>
                                         </form>

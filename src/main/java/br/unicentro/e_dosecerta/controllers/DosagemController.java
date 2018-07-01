@@ -44,25 +44,6 @@ public class DosagemController {
 
         return mv;
     }
-
-//    @RequestMapping(value = "/cadastro/dosagem", method = RequestMethod.GET)
-//    private ModelAndView farmacos(@PathVariable("animalId") Integer animalId) {
-//        ModelAndView mv = new ModelAndView("cadastro/dosagem");
-//        Animal animal = animalRpt.findByAnimalId(animalId);
-//
-//        console();
-//        
-//        System.out.println(animal);
-//        System.out.println(animal.getEspecieId());
-//        System.out.println(animal.getEspecieId());
-//        Iterable<FarmacoEspecie> farmacosEsp = farmacoEspRpt.findByEspecieId(animal.getEspecieId());
-//        mv.addObject("farmacosEsp", farmacosEsp);
-//        
-//        Iterable<Farmaco> farmacos = farmacoRpt.findByfarmacoId(farmacosEsp);
-//        mv.addObject("farmacos", farmacos);
-//
-//        return mv;
-//    }
     
     @RequestMapping(value = "/cadastro/dosagem", method = RequestMethod.POST)
     private String form(Dosagem dosagem) {
