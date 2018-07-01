@@ -34,19 +34,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <script src="/js/jquery.cookie.js"></script>
         <script src="/js/screenfull.js"></script>
         <script>
-$(function () {
-    $('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
+            $(function () {
+                $('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
 
-    if (!screenfull.enabled) {
-        return false;
-    }
+                if (!screenfull.enabled) {
+                    return false;
+                }
 
 
 
-    $('#toggle').click(function () {
-        screenfull.toggle($('#container')[0]);
-    });
-});
+                $('#toggle').click(function () {
+                    screenfull.toggle($('#container')[0]);
+                });
+            });
         </script>
 
     </head>
@@ -159,32 +159,33 @@ $(function () {
                                 <h3 class="title1"></h3>
                                 <div class="form-three widget-shadow">
                                     <th:block th:include="mensagens"/>
-                                    <form class="form-horizontal" action="/cadastro/animal" method="post">
+                                    <form class="form-horizontal" action="/animal/${rg}" method="post">
                                         <div class="form-group">
                                             <label for="focusedinput" class="col-sm-2 control-label">Nome</label>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control1" name="nome" id="focusedinput" placeholder="Nome do Animal" />
+                                                <input th:value="${animal.nome}" type="text" class="form-control1" name="nome" id="focusedinput" placeholder="Nome do Animal" />
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="disabledinput" class="col-sm-2 control-label">RG</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="rg" class="form-control1" id="focusedinput" placeholder="RG do Animal" required=""/>
+                                                <input th:value="${animal.rg}"  type="text" name="rg" class="form-control1" id="focusedinput" placeholder="RG do Animal" required=""/>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="selector1" class="col-sm-2 control-label">Especie</label>
                                             <div class="col-sm-8">
                                                 <select name="especieId" id="selector1" class="form-control1" required="">
+<!--                                                    <option th:value="${animal.especieId}" ></option>-->
                                                     <option>Selecione uma espécie...</option>
                                                     <option th:each="esp : ${especies}" th:value="${esp.especieId}" th:text="${esp.nome}" ></option>
                                                 </select>
                                             </div>
                                         </div>
-                                        
+
                                         <hr/>
                                         <div class="form-group">
-                                            <p><input type="submit" name="sub-1" value="Cadastrar" class="btn btn-primary"/></p>
+                                            <p><input type="submit" name="sub-1" value="Alterar" class="btn btn-primary"/></p>
                                         </div>
                                     </form>
                                 </div>
