@@ -81,7 +81,7 @@ public class Especie implements Serializable {
 
     @Override
     public String toString() {
-        return "br.unicentro.e_dosecerta.entity.Especie[ especieId=" + especieId + " ]";
+        return "br.unicentro.e_dosecerta.models.Especie[ especieId=" + especieId + " ]";
     }
 
 }

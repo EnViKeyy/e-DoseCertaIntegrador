@@ -135,7 +135,7 @@ public class Veterinario implements Serializable, UserDetails {
 
     @Override
     public String toString() {
-        return "br.unicentro.e_dosecerta.entity.Veterinario[ veterinarioId=" + veterinarioId + " ]";
+        return "br.unicentro.e_dosecerta.models.Veterinario[ veterinarioId=" + veterinarioId + " ]";
     }
 
     @Override

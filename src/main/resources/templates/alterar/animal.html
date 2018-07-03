@@ -176,7 +176,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                             <label for="selector1" class="col-sm-2 control-label">Especie</label>
                                             <div class="col-sm-8">
                                                 <select name="especieId" id="selector1" class="form-control1" required="">
-<!--                                                    <option th:value="${animal.especieId}" ></option>-->
+                                                    <!--                                                    <option th:value="${animal.especieId}" ></option>-->
                                                     <option>Selecione uma espécie...</option>
                                                     <option th:each="esp : ${especies}" th:value="${esp.especieId}" th:text="${esp.nome}" ></option>
                                                 </select>

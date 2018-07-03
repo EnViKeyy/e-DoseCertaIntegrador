@@ -9,7 +9,7 @@ public interface AnimalRepository extends CrudRepository<Animal, String> {
 
     @Query("select a from Animal a where  a.animalId = :animalId")
     public Animal findByAnimalId(@Param("animalId") Integer animalId);
-    
+
     @Query("select a from Animal a where  a.rg = :rg")
     public Animal findByRg(@Param("rg") String rg);
 }

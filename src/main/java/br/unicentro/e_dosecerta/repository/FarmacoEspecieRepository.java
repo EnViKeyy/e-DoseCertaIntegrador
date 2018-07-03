@@ -10,7 +10,4 @@ public interface FarmacoEspecieRepository extends CrudRepository<FarmacoEspecie,
 
     @Query("select fs from FarmacoEspecie fs where fs.farmacoEspeciePK = :farmacoEspeciePK")
     public FarmacoEspecie findByEspecieFarmacoId(@Param("farmacoEspeciePK") FarmacoEspeciePK farmacoEspeciePK);
-    
-//    @Query("select fs from FarmacoEspecie fs where fs.farmacoId = :farmacoId and fs.farmacoId = :farmacoId")
-//    public FarmacoEspecie findByEspecieFarmacoId(@Param("farmacoId") Integer farmacoId, @Param("especieId") Integer especieId);
 }

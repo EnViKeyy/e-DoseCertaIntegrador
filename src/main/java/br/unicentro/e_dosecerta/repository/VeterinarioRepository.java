@@ -9,10 +9,10 @@ public interface VeterinarioRepository extends CrudRepository<Veterinario, Strin
 
     @Query("select v from Veterinario v where  v.email = :email")
     public Veterinario findByEmail(@Param("email") String email);
-    
+
     @Query("select v from Veterinario v where  v.crmv = :crmv")
     public Veterinario findByCrmv(@Param("crmv") String crmv);
-    
+
     @Query("select v from Veterinario v where  v.veterinarioId = :veterinarioId")
     public Veterinario findByVeterinarioId(@Param("veterinarioId") Integer veterinarioId);
 }

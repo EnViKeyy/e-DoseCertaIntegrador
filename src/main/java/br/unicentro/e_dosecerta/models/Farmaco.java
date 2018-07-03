@@ -95,7 +95,7 @@ public class Farmaco implements Serializable {
 
     @Override
     public String toString() {
-        return "br.unicentro.e_dosecerta.entity.Farmaco[ farmacoId=" + farmacoId + " ]";
+        return "br.unicentro.e_dosecerta.models.Farmaco[ farmacoId=" + farmacoId + " ]";
     }
 
 }

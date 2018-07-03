@@ -19,27 +19,27 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Animal implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "animalid")
     private Integer animalId;
-    
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 80)
     @Column(name = "Nome")
     @NotEmpty
     private String nome;
-    
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
     @Column(name = "RG")
     @NotEmpty
     private String rg;
-    
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "especieid")
@@ -113,7 +113,7 @@ public class Animal implements Serializable {
 
     @Override
     public String toString() {
-        return "br.unicentro.e_dosecerta.entity.Animal[ animalId=" + animalId + " ]";
+        return "br.unicentro.e_dosecerta.models.Animal[ animalId=" + animalId + " ]";
     }
 
 }

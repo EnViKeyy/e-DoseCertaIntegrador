@@ -106,7 +106,7 @@ public class FarmacoEspecie implements Serializable {
 
     @Override
     public String toString() {
-        return "br.unicentro.e_dosecerta.entity.FarmacoEspecie[ farmacoEspeciePK=" + farmacoEspeciePK + " ]";
+        return "br.unicentro.e_dosecerta.models.FarmacoEspecie[ farmacoEspeciePK=" + farmacoEspeciePK + " ]";
     }
 
 }

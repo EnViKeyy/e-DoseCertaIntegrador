@@ -153,7 +153,7 @@ public class Dosagem implements Serializable {
 
     @Override
     public String toString() {
-        return "br.unicentro.e_dosecerta.entity.Dosagem[ dosagemId=" + dosagemId + " ]";
+        return "br.unicentro.e_dosecerta.models.Dosagem[ dosagemId=" + dosagemId + " ]";
     }
 
 }

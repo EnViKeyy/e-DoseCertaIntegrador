@@ -1,6 +1,7 @@
 package br.unicentro.e_dosecerta.util;
 
 public class AnimalEspecie {
+
     private Integer animalId;
     private String nome;
     private String rg;
@@ -37,6 +38,5 @@ public class AnimalEspecie {
     public void setEspecie(String especie) {
         this.especie = especie;
     }
-    
-    
+
 }
