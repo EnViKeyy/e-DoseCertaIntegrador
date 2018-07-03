@@ -8,5 +8,8 @@ import org.springframework.data.repository.query.Param;
 public interface DosagemRepository extends CrudRepository<Dosagem, String> {
 
     @Query("select d from Dosagem d where d.veterinarioId = :veterinarioId")
-    public Dosagem findByVeterinarioId(@Param("veterinarioId") Integer veterinarioId);
+    public Iterable<Dosagem> findByVeterinarioId(@Param("veterinarioId") Integer veterinarioId);
+    
+    @Query("select d from Dosagem d where d.animalId = :animalId")
+    public Iterable<Dosagem> findByAnimalId(@Param("animalId") Integer animalId);
 }
