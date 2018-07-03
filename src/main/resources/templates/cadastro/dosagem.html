@@ -118,29 +118,29 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 </div>
                 <div class="header-right">
                     <div class="profile_details_left">
-                        <div class="profile_details">		
+                        <div class="profile_details">
                             <ul>
                                 <li class="dropdown profile_details_drop">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                        <div class="profile_img">	
-                                            <span class="prfil-img"><i class="fa fa-user" aria-hidden="true"></i></span> 
-                                            <div class="clearfix"></div>	
-                                        </div>	
+                                        <div class="profile_img">
+                                            <span class="prfil-img"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                            <div class="clearfix"></div>
+                                        </div>
                                     </a>
                                     <ul class="dropdown-menu drp-mnu">
-                                        <li> <a href="#"><i class="fa fa-user"></i> Perfil</a> </li>
-                                        <li> <a href="/logout"><i class="fa fa-sign-out"></i> Logout</a> </li>
+                                        <li><a href="/perfil"><i class="fa fa-user"></i>Perfil</a></li>
+                                        <li><a href="/logout"><i class="fa fa-sign-out"></i>Logout</a></li>
                                     </ul>
                                 </li>
                             </ul>
                         </div>
-                        <div class="clearfix"> </div>
+                        <div class="clearfix"></div>
                     </div>
                 </div>
                 <div class="clearfix"> </div>
             </section>
             <div class="main-grid">
-                <div class="agile-grids">	
+                <div class="agile-grids">
                     <!-- validation -->
                     <div class="grids">
                         <div class="progressbar-heading grids-heading">
@@ -156,8 +156,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                             <div class="input-info">
                                                 <h3>Informe os Dados</h3>
                                             </div>
-                                            
+
                                             <h4>Fármaco</h4>
+                                            <label for="animalId">Fármaco &nbsp;<span class="at-required-highlight"></span></label>
                                             <div class="form-group">
                                                 <select name="farmacoId" id="farmacoId" required="true" class="form-control">
                                                     <option>Selecione um fármaco...</option>
@@ -172,8 +173,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                                     <option th:each="animal : ${animais}" th:value="${animal.animalId}" th:text="${animal.nome}" ></option>
                                                 </select>
                                             </div>
- 
-                                           <label for="peso">Peso do animal &nbsp;<span class="at-required-highlight"></span></label>
+
+                                            <label for="peso">Peso do animal &nbsp;<span class="at-required-highlight"></span></label>
                                             <div class="form-group">
                                                 <input type="text" name="peso" id="peso" required="" 
                                                        class="form-control" data-required="Campo obrigatório!"
