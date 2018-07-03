@@ -28,7 +28,6 @@ public class Dosagem implements Serializable {
     private Integer dosagemId;
 
     @Basic(optional = false)
-    @NotNull
     @Column(name = "Dosagem")
     private float dosagem;
 
@@ -38,23 +37,19 @@ public class Dosagem implements Serializable {
     private float peso;
 
     @Basic(optional = false)
-    @NotNull
     @Column(name = "Data")
     @Temporal(TemporalType.TIMESTAMP)
     private Date data;
 
     @Basic(optional = false)
-    @NotNull
     @Column(name = "animalid")
     private int animalId;
 
     @Basic(optional = false)
-    @NotNull
     @Column(name = "farmacoid")
     private int farmacoId;
 
     @Basic(optional = false)
-    @NotNull
     @Column(name = "veterinarioid")
     private int veterinarioId;
 
