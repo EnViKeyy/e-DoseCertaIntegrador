@@ -75,6 +75,10 @@ public class VeterinarioController {
     public String alterarPerfil(Veterinario veterinario) {
         Veterinario veterinarioFind = veterinarioAutenticado();
         veterinario.setVeterinarioId(veterinarioFind.getVeterinarioId());
+        
+        if (veterinario.getNome().isEmpty()) {
+            veterinario.setNome(veterinarioFind.getNome());
+        }
 
         if (veterinario.getCrmv().isEmpty()) {
             veterinario.setCrmv(veterinarioFind.getCrmv());
