@@ -44,6 +44,13 @@ public class VeterinarioController {
             attributes.addFlashAttribute("mensagem", "Campos obrigatórios não preenchidos!");
             return "redirect:/index";
         }
+        
+        Veterinario veterinarioFind = veterinarioRpt.findByCrmv(veterinario.getCrmv());
+        
+        if (veterinarioFind.getVeterinarioId() != null) {
+            attributes.addFlashAttribute("mensagem", "Este CRMV já foi cadastrado!");
+            return "redirect:/index";
+        }
         BCryptPasswordEncoder senhaCripto = new BCryptPasswordEncoder();
         String senha = senhaCripto.encode(veterinario.getSenha());
         veterinario.setSenha(senha);
