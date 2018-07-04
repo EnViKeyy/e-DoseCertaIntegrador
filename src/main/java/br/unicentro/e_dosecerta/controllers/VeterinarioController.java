@@ -2,6 +2,7 @@ package br.unicentro.e_dosecerta.controllers;
 
 import br.unicentro.e_dosecerta.models.Veterinario;
 import br.unicentro.e_dosecerta.repository.VeterinarioRepository;
+import java.util.Objects;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -41,22 +42,32 @@ public class VeterinarioController {
     @RequestMapping(value = "/cadastro", method = RequestMethod.POST)
     public String cadastroVeterinario(@Valid Veterinario veterinario, BindingResult result, RedirectAttributes attributes) {
         if (result.hasErrors()) {
-            attributes.addFlashAttribute("mensagem", "Campos obrigatórios não preenchidos!");
-            return "redirect:/index";
+            attributes.addFlashAttribute("falha", "Campos obrigatórios não preenchidos!");
+            return "redirect:/";
         }
-        
+
         Veterinario veterinarioFind = veterinarioRpt.findByCrmv(veterinario.getCrmv());
-        
-        if (veterinarioFind.getVeterinarioId() != null) {
-            attributes.addFlashAttribute("mensagem", "Este CRMV já foi cadastrado!");
-            return "redirect:/index";
+        if (veterinarioFind != null) {
+            if (!Objects.equals(veterinarioFind.getVeterinarioId(), veterinario.getVeterinarioId())) {
+                attributes.addFlashAttribute("falha", "Este CRMV já foi cadastrado!");
+                return "redirect:/";
+            }
         }
+
+        veterinarioFind = veterinarioRpt.findByEmail(veterinario.getEmail());
+        if (veterinarioFind != null) {
+            if (!Objects.equals(veterinarioFind.getVeterinarioId(), veterinario.getVeterinarioId())) {
+                attributes.addFlashAttribute("falha", "Este email já foi cadastrado!");
+                return "redirect:/";
+            }
+        }
+
         BCryptPasswordEncoder senhaCripto = new BCryptPasswordEncoder();
         String senha = senhaCripto.encode(veterinario.getSenha());
         veterinario.setSenha(senha);
         veterinarioRpt.save(veterinario);
-        attributes.addFlashAttribute("mensagem", "Cadastro efetuado com sucesso!");
-        return "redirect:/index";
+        attributes.addFlashAttribute("sucesso", "Cadastro efetuado com sucesso!");
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/perfil", method = RequestMethod.GET)
@@ -72,17 +83,30 @@ public class VeterinarioController {
     public ModelAndView alterarPerfil() {
         ModelAndView mv = new ModelAndView("alterar/perfil");
         Veterinario veterinario = veterinarioAutenticado();
-        veterinario = veterinarioRpt.findByVeterinarioId(veterinario.getVeterinarioId());
         mv.addObject("veterinario", veterinario);
         return mv;
-
     }
 
     @RequestMapping(value = "/alterar/perfil", method = RequestMethod.POST)
-    public String alterarPerfil(Veterinario veterinario) {
-        Veterinario veterinarioFind = veterinarioAutenticado();
-        veterinario.setVeterinarioId(veterinarioFind.getVeterinarioId());
-        
+    public String alterarPerfil(@Valid Veterinario veterinario, BindingResult result, RedirectAttributes attributes) {
+
+        Veterinario veterinarioFind = veterinarioRpt.findByCrmv(veterinario.getCrmv());
+        if (veterinarioFind != null) {
+            if (!Objects.equals(veterinarioFind.getVeterinarioId(), veterinario.getVeterinarioId())) {
+                attributes.addFlashAttribute("falha", "Este CRMV já foi cadastrado!");
+                return "redirect:/alterar/perfil";
+            }
+        }
+
+        veterinarioFind = veterinarioRpt.findByEmail(veterinario.getEmail());
+        if (veterinarioFind != null) {
+            veterinarioFind = veterinarioRpt.findByEmail(veterinario.getEmail());
+            if (!Objects.equals(veterinarioFind.getVeterinarioId(), veterinario.getVeterinarioId())) {
+                attributes.addFlashAttribute("falha", "Este email já foi cadastrado!");
+                return "redirect:/alterar/perfil";
+            }
+        }
+
         if (veterinario.getNome().isEmpty()) {
             veterinario.setNome(veterinarioFind.getNome());
         }
@@ -104,6 +128,7 @@ public class VeterinarioController {
         }
 
         veterinarioRpt.save(veterinario);
-        return "redirect:/alterar/perfil";
+        attributes.addFlashAttribute("sucesso", "Perfil alterado com sucesso!");
+        return "redirect:/perfil";
     }
 }
