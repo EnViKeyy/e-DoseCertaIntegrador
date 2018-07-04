@@ -9,7 +9,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-    
+
     <head>
         <title>E-DoseCerta</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -157,7 +157,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                                 <h3>Informe os Dados</h3>
                                             </div>
                                             <div class="form-body form-body-info">
+                                                <th:block th:include="mensagens"/>
                                                 <form data-toggle="form-horizontal" novalidate="true" action="/alterar/perfil" method="post">
+                                                    <input th:value="${veterinario.veterinarioId}" name="veterinarioId" hidden="" />
                                                     <div class="form-group mb-n">
                                                         <label class="col-md-2 control-label">Nome</label>
                                                         <div class="col-md-8">
@@ -271,7 +273,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <script src="/js/validator.min.js"></script>
         <!--//validator js-->
         <script src="/js/proton.js"></script>
-        
+
         <!-- BEGIN JIVOSITE CODE {literal} -->
         <script type='text/javascript'>
             (function () {
