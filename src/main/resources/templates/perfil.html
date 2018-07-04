@@ -5,7 +5,11 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <!DOCTYPE html>
-<html>
+<html lang="pt-br"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
     <head>
         <title>E-DoseCerta</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -157,15 +161,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                                     <input th:value="${veterinario.nome}" type="text" class="form-control1" readonly="" />
                                                 </div>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group mb-n">
                                                 <label class="col-md-2 control-label">Email Cadastrado</label>
                                                 <div class="col-md-8">
-                                                    <div class="input-group">					
-                                                        <span class="input-group-addon">
-                                                            <i class="fa fa-envelope-o"></i>
-                                                        </span>
-                                                        <input th:value="${veterinario.email}" type="text" class="form-control1" readonly="" />
-                                                    </div>
+                                                    <input th:value="${veterinario.email}" type="text" class="form-control1" readonly="" />
                                                 </div>
                                             </div>
                                             <div class="form-group mb-n">
