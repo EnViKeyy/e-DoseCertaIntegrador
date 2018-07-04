@@ -39,7 +39,7 @@ public class DosagemController {
     private FarmacoEspecieRepository farmacoEspRpt;
 
     @RequestMapping(value = "/cadastro/dosagem", method = RequestMethod.GET)
-    private ModelAndView animais() {
+    private ModelAndView cadastroDosagem() {
         ModelAndView mv = new ModelAndView("cadastro/dosagem");
 
         Iterable<Animal> animais = animalRpt.findAll();
@@ -52,7 +52,7 @@ public class DosagemController {
     }
 
     @RequestMapping(value = "/cadastro/dosagem", method = RequestMethod.POST)
-    private String form(@Valid Dosagem dosagem, BindingResult result, RedirectAttributes attributes) {
+    private String cadastroDosagem(@Valid Dosagem dosagem, BindingResult result, RedirectAttributes attributes) {
         if (result.hasErrors()) {
             attributes.addFlashAttribute("mensagem", "Campos obrigatórios não preenchidos!");
             return "redirect:/cadastro/dosagem";
