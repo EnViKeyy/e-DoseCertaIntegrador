@@ -7,6 +7,7 @@ import br.unicentro.e_dosecerta.repository.EspecieRepository;
 import br.unicentro.e_dosecerta.util.AnimalEspecie;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,6 +42,13 @@ public class AnimalController {
             attributes.addFlashAttribute("mensagem", "Campos obrigatórios não preenchidos!");
             return "redirect:/cadastro/animal";
         }
+
+        Animal animalFind = animalRpt.findByRg(animal.getRg());
+        if (animalFind.getAnimalId() != null) {
+            attributes.addFlashAttribute("mensagem", "Este RG já foi cadastrado!");
+            return "redirect:/cadastro/animal";
+        }
+
         animalRpt.save(animal);
         attributes.addFlashAttribute("mensagem", "Cadastro efetuado com sucesso!");
         return "redirect:/cadastro/animal";
@@ -88,16 +96,22 @@ public class AnimalController {
         return mv;
     }
 
-    @RequestMapping(value = "animal/{rg}", method = RequestMethod.POST)
+    @RequestMapping(value = "/animal/{rg}", method = RequestMethod.POST)
     public String alterarAnimal(@RequestParam("rg") String rg, Animal animal, BindingResult result, RedirectAttributes attributes) {
         if (result.hasErrors()) {
             attributes.addFlashAttribute("mensagem", "Campos obrigatórios não preenchidos!");
-            return "redirect:/cadastro/animal";
+            return "redirect:/animal/" + rg;
         }
-        Animal animalFind = animalRpt.findByRg(rg);
+        
+        Animal animalFind = animalRpt.findByRg(animal.getRg());
+        if (!Objects.equals(animalFind.getAnimalId(), animal.getAnimalId())) {
+            attributes.addFlashAttribute("mensagem", "Este RG já foi cadastrado!");
+            return "redirect:/animal/" + rg;
+        }
+
         animal.setAnimalId(animalFind.getAnimalId());
         animalRpt.save(animal);
         attributes.addFlashAttribute("mensagem", "Cadastro efetuado com sucesso!");
-        return "redirect:/consulta/animal";
+        return "redirect:/animal/" + rg;
     }
 }
