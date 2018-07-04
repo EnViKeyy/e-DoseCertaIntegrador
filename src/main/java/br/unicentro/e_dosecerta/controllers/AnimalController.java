@@ -39,7 +39,7 @@ public class AnimalController {
     @RequestMapping(value = "/cadastro/animal", method = RequestMethod.POST)
     private String cadastroAnimal(@Valid Animal animal, BindingResult result, RedirectAttributes attributes) {
         if (result.hasErrors()) {
-            attributes.addFlashAttribute("mensagem", "Campos obrigatórios não preenchidos!");
+            attributes.addFlashAttribute("falha", "Campos obrigatórios não preenchidos!");
             return "redirect:/cadastro/animal";
         }
 
@@ -51,7 +51,7 @@ public class AnimalController {
             }
         }
         animalRpt.save(animal);
-        attributes.addFlashAttribute("mensagem", "Cadastro efetuado com sucesso!");
+        attributes.addFlashAttribute("sucesso", "Cadastro efetuado com sucesso!");
         return "redirect:/cadastro/animal";
     }
 
