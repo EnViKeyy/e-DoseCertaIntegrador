@@ -5,7 +5,11 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <!DOCTYPE html>
-<html>
+<html lang="pt-br"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    
     <head>
         <title>E-DoseCerta</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -144,42 +148,50 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <div class="progressbar-heading grids-heading">
                             <h2>Alterar Dados da Conta</h2>
                         </div>
-
-                        <div class="forms-grids">
-
-                            <div class="w3agile-validation w3ls-validation">
-                                <div class="panel panel-widget agile-validation">
-                                    <div class="validation-grids widget-shadow" data-example-id="basic-forms"> 
-                                        <div class="input-info">
-                                            <h3>Informe os Dados</h3>
-                                        </div>
-                                        <div class="form-body form-body-info">
-                                            <form data-toggle="validator" novalidate="true" action="/alterar/perfil" method="post">
-                                                <div class="form-group valid-form">
-                                                    <input th:value="${veterinario.nome}" type="text" class="form-control" id="inputName" name="nome" placeholder="Nome" />
-                                                </div>
-                                                <div class="form-group valid-form">
-                                                    <input th:value="${veterinario.crmv}" type="text" class="form-control" id="inputCrmv" name="crmv" placeholder="CRMV" />
-                                                </div>
-                                                <div class="form-group has-feedback">
-                                                    <input th:value="${veterinario.email}" name="email" type="email" class="form-control" id="inputEmail" placeholder="Email" 
-                                                           data-error="Bruh, that email address is invalid" />
-                                                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                                                </div>
-                                                <div class="form-group">
-                                                    <input name="senha" type="password" data-toggle="validator" data-minlength="6" class="form-control" 
-                                                           id="inputPassword" placeholder="Senha" />
-                                                </div>
-                                                <div class="form-group">
-                                                    <input type="password" class="form-control" id="inputPasswordConfirm" 
-                                                           data-match="#inputPassword" data-match-error="Senhas não conferem" 
-                                                           placeholder="Confirm password" />
-                                                    <div class="help-block with-errors"></div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <button type="submit" class="btn btn-primary disabled">Atualizar</button>
-                                                </div>
-                                            </form>
+                        <div class="panel panel-widget forms-panel w3-last-form">
+                            <div class="forms">
+                                <div class="form-three widget-shadow">
+                                    <div class=" panel-body-inputin">
+                                        <div class="form-horizontal" data-example-id="basic-forms">
+                                            <div class="input-info">
+                                                <h3>Informe os Dados</h3>
+                                            </div>
+                                            <div class="form-body form-body-info">
+                                                <form data-toggle="form-horizontal" novalidate="true" action="/alterar/perfil" method="post">
+                                                    <div class="form-group mb-n">
+                                                        <label class="col-md-2 control-label">Nome</label>
+                                                        <div class="col-md-8">
+                                                            <input th:value="${veterinario.nome}" type="text" class="form-control" id="inputName" 
+                                                                   name="nome" placeholder="Nome" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group mb-n">
+                                                        <label class="col-md-2 control-label">CRMV</label>
+                                                        <div class="col-md-8">
+                                                            <input th:value="${veterinario.crmv}" type="text" class="form-control" id="inputCrmv" 
+                                                                   name="crmv" placeholder="CRMV" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group mb-n">
+                                                        <label class="col-md-2 control-label">Email</label>
+                                                        <div class="col-md-8">
+                                                            <input th:value="${veterinario.email}" name="email" type="email" class="form-control" 
+                                                                   id="inputEmail" placeholder="Email" data-error="Bruh, that email address is invalid" />
+                                                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group mb-n">
+                                                        <label class="col-md-2 control-label">Senha</label>
+                                                        <div class="col-md-8">
+                                                            <input name="senha" type="password" data-toggle="validator" data-minlength="6" 
+                                                                   class="form-control" id="inputPassword" placeholder="Senha" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <button type="submit" class="btn btn-primary">Atualizar</button>
+                                                    </div>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
