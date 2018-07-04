@@ -5,7 +5,6 @@
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
             <property name="hibernate.show_sql" value="true"/>
-            <!--<property name="javax.persistence.jdbc.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>-->
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/e_dosecerta?useTimezone=true&amp;serverTimezone=UTC"/>
             <property name="javax.persistence.jdbc.user" value="root"/>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
