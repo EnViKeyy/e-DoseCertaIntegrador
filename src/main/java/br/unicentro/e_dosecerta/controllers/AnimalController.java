@@ -44,11 +44,12 @@ public class AnimalController {
         }
 
         Animal animalFind = animalRpt.findByRg(animal.getRg());
-        if (animalFind.getAnimalId() != null) {
-            attributes.addFlashAttribute("mensagem", "Este RG já foi cadastrado!");
-            return "redirect:/cadastro/animal";
+        if (animalFind != null) {
+            if (!Objects.equals(animalFind.getAnimalId(), animal.getAnimalId())) {
+                attributes.addFlashAttribute("falha", "Este RG já foi cadastrado!");
+                return "redirect:/cadastro/animal/";
+            }
         }
-
         animalRpt.save(animal);
         attributes.addFlashAttribute("mensagem", "Cadastro efetuado com sucesso!");
         return "redirect:/cadastro/animal";
@@ -82,16 +83,13 @@ public class AnimalController {
 
     @RequestMapping(value = "animal/{rg}", method = RequestMethod.GET)
     public ModelAndView detalhesAnimal(@PathVariable("rg") String rg) {
-        Animal animalFind = animalRpt.findByRg(rg);
+        Animal animal = animalRpt.findByRg(rg);
         ModelAndView mv = new ModelAndView("alterar/animal");
 
-        AnimalEspecie animalEsp;
-
         Iterable<Especie> especies = especieRpt.findAll();
-        Iterable<Animal> animais = animalRpt.findAll();
 
         mv.addObject("especies", especies);
-        mv.addObject("animal", animalFind);
+        mv.addObject("animal", animal);
 
         return mv;
     }
@@ -99,19 +97,19 @@ public class AnimalController {
     @RequestMapping(value = "/animal/{rg}", method = RequestMethod.POST)
     public String alterarAnimal(@RequestParam("rg") String rg, Animal animal, BindingResult result, RedirectAttributes attributes) {
         if (result.hasErrors()) {
-            attributes.addFlashAttribute("mensagem", "Campos obrigatórios não preenchidos!");
-            return "redirect:/animal/" + rg;
-        }
-        
-        Animal animalFind = animalRpt.findByRg(animal.getRg());
-        if (!Objects.equals(animalFind.getAnimalId(), animal.getAnimalId())) {
-            attributes.addFlashAttribute("mensagem", "Este RG já foi cadastrado!");
+            attributes.addFlashAttribute("falha", "Campos obrigatórios não preenchidos!");
             return "redirect:/animal/" + rg;
         }
 
-        animal.setAnimalId(animalFind.getAnimalId());
+        Animal animalFind = animalRpt.findByRg(animal.getRg());
+        if (animalFind != null) {
+            if (!Objects.equals(animalFind.getAnimalId(), animal.getAnimalId())) {
+                attributes.addFlashAttribute("falha", "Este RG já foi cadastrado!");
+                return "redirect:/animal/" + rg;
+            }
+        }
         animalRpt.save(animal);
-        attributes.addFlashAttribute("mensagem", "Cadastro efetuado com sucesso!");
+        attributes.addFlashAttribute("sucesso", "Cadastro efetuado com sucesso!");
         return "redirect:/animal/" + rg;
     }
 }
