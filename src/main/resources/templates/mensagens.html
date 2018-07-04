@@ -8,8 +8,12 @@
         <title>E-DoseCerta</title>
     </head>	
     <body>	
-        <div class="alert alert-success alert-dismissible" role="alert" th:if="${not #strings.isEmpty(mensagem)}">
-            <span th:text="${mensagem}" ></span>
+        <div class="alert alert-success alert-dismissible" role="alert" th:if="${not #strings.isEmpty(sucesso)}">
+            <span th:text="${sucesso}" ></span>
+        </div>
+        
+        <div class="alert alert-warning alert-dismissible" role="alert" th:if="${not #strings.isEmpty(falha)}">
+            <span th:text="${falha}" ></span>
         </div>
     </body>						
 </html>
