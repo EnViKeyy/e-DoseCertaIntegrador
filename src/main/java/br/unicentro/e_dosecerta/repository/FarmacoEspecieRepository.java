@@ -9,5 +9,5 @@ import org.springframework.data.repository.query.Param;
 public interface FarmacoEspecieRepository extends CrudRepository<FarmacoEspecie, String> {
 
     @Query("select fs from FarmacoEspecie fs where fs.farmacoEspeciePK = :farmacoEspeciePK")
-    public FarmacoEspecie findByEspecieFarmacoId(@Param("farmacoEspeciePK") FarmacoEspeciePK farmacoEspeciePK);
+    public FarmacoEspecie findByFarmacoEspecieId(@Param("farmacoEspeciePK") FarmacoEspeciePK farmacoEspeciePK);
 }
