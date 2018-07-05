@@ -83,6 +83,7 @@ public class VeterinarioController {
     public ModelAndView alterarPerfil() {
         ModelAndView mv = new ModelAndView("alterar/perfil");
         Veterinario veterinario = veterinarioAutenticado();
+        veterinario = veterinarioRpt.findByVeterinarioId(veterinario.getVeterinarioId());
         mv.addObject("veterinario", veterinario);
         return mv;
     }
