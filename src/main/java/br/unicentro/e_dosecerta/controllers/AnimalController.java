@@ -81,9 +81,9 @@ public class AnimalController {
         return mv;
     }
 
-    @RequestMapping(value = "animal/{rg}", method = RequestMethod.GET)
-    public ModelAndView detalhesAnimal(@PathVariable("rg") String rg) {
-        Animal animal = animalRpt.findByRg(rg);
+    @RequestMapping(value = "animal/{animalId}", method = RequestMethod.GET)
+    public ModelAndView detalhesAnimal(@PathVariable("animalId") Integer animalId) {
+        Animal animal = animalRpt.findByAnimalId(animalId);
         ModelAndView mv = new ModelAndView("alterar/animal");
 
         Iterable<Especie> especies = especieRpt.findAll();
@@ -94,22 +94,22 @@ public class AnimalController {
         return mv;
     }
 
-    @RequestMapping(value = "/animal/{rg}", method = RequestMethod.POST)
-    public String alterarAnimal(@RequestParam("rg") String rg, Animal animal, BindingResult result, RedirectAttributes attributes) {
+    @RequestMapping(value = "/animal/{animalId}", method = RequestMethod.POST)
+    public String alterarAnimal(@RequestParam("animalId") Integer animalId, Animal animal, BindingResult result, RedirectAttributes attributes) {
         if (result.hasErrors()) {
             attributes.addFlashAttribute("falha", "Campos obrigatórios não preenchidos!");
-            return "redirect:/animal/" + rg;
+            return "redirect:/animal/" + animalId;
         }
 
         Animal animalFind = animalRpt.findByRg(animal.getRg());
         if (animalFind != null) {
             if (!Objects.equals(animalFind.getAnimalId(), animal.getAnimalId())) {
                 attributes.addFlashAttribute("falha", "Este RG já foi cadastrado!");
-                return "redirect:/animal/" + rg;
+                return "redirect:/animal/" + animalId;
             }
         }
         animalRpt.save(animal);
         attributes.addFlashAttribute("sucesso", "Animal alterado com sucesso!");
-        return "redirect:/animal/" + rg;
+        return "redirect:/animal/" + animalId;
     }
 }
