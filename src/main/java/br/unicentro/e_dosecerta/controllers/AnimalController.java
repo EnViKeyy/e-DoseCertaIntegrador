@@ -109,7 +109,7 @@ public class AnimalController {
             }
         }
         animalRpt.save(animal);
-        attributes.addFlashAttribute("sucesso", "Cadastro efetuado com sucesso!");
+        attributes.addFlashAttribute("sucesso", "Animal alterado com sucesso!");
         return "redirect:/animal/" + rg;
     }
 }
