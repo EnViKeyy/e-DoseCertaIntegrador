@@ -2,12 +2,14 @@ package br.unicentro.e_dosecerta.controllers;
 
 import br.unicentro.e_dosecerta.models.Animal;
 import br.unicentro.e_dosecerta.models.Dosagem;
+import br.unicentro.e_dosecerta.models.Especie;
 import br.unicentro.e_dosecerta.models.Farmaco;
 import br.unicentro.e_dosecerta.models.FarmacoEspecie;
 import br.unicentro.e_dosecerta.models.FarmacoEspeciePK;
 import br.unicentro.e_dosecerta.models.Veterinario;
 import br.unicentro.e_dosecerta.repository.AnimalRepository;
 import br.unicentro.e_dosecerta.repository.DosagemRepository;
+import br.unicentro.e_dosecerta.repository.EspecieRepository;
 import br.unicentro.e_dosecerta.repository.FarmacoEspecieRepository;
 import br.unicentro.e_dosecerta.repository.FarmacoRepository;
 import br.unicentro.e_dosecerta.util.DosagemFarmacoAnimal;
@@ -33,6 +35,9 @@ public class DosagemController {
     private AnimalRepository animalRpt;
 
     @Autowired
+    private EspecieRepository especieRpt;
+
+    @Autowired
     private FarmacoRepository farmacoRpt;
 
     @Autowired
@@ -54,29 +59,32 @@ public class DosagemController {
     @RequestMapping(value = "/cadastro/dosagem", method = RequestMethod.POST)
     private String cadastroDosagem(@Valid Dosagem dosagem, BindingResult result, RedirectAttributes attributes) {
         if (result.hasErrors()) {
-            attributes.addFlashAttribute("mensagem", "Campos obrigatórios não preenchidos!");
+            attributes.addFlashAttribute("falha", "Campos obrigatórios não preenchidos!");
             return "redirect:/cadastro/dosagem";
         }
-        
+
+        Float dose;
         Animal animal = animalRpt.findByAnimalId(dosagem.getAnimalId());
         Farmaco farmaco = farmacoRpt.findByFarmacoId(dosagem.getFarmacoId());
+        Especie especie = especieRpt.findByEspecieId(animal.getEspecieId());
 
         FarmacoEspeciePK farmacoEspPK = new FarmacoEspeciePK();
         farmacoEspPK.setEspecieId(animal.getEspecieId());
         farmacoEspPK.setFarmacoId(dosagem.getFarmacoId());
-        FarmacoEspecie farmacoEsp = farmacoEspRpt.findByEspecieFarmacoId(farmacoEspPK);
+        FarmacoEspecie farmacoEsp = farmacoEspRpt.findByFarmacoEspecieId(farmacoEspPK);
+        if (farmacoEsp == null) {
+            attributes.addFlashAttribute("falha", "Não é possível à administração de " + farmaco.getNome() + " para animais da espécie " + especie.getNome());
+            return "redirect:/cadastro/dosagem";
+        }
 
         dosagem.setData(new Date());
         dosagem.setVeterinarioId(new VeterinarioController().veterinarioAutenticado().getVeterinarioId());
-
-        Float dose;
 
         dose = (dosagem.getPeso() * farmacoEsp.getDoseMaxima()) / farmaco.getConcentracao();
         dosagem.setDosagem(dose);
         dosagemRpt.save(dosagem);
 
         Dosagem dose2 = new Dosagem();
-
         dose2.setAnimalId(dosagem.getAnimalId());
         dose2.setData(new Date());
         dose2.setDosagem(0);
@@ -99,8 +107,8 @@ public class DosagemController {
         dose2.setPeso(dosagem.getPeso());
         dose2.setVeterinarioId(dosagem.getVeterinarioId());
         dosagemRpt.save(dose2);
-        attributes.addFlashAttribute("mensagem", "Cadastro efetuado com sucesso!");
-
+        
+        attributes.addFlashAttribute("sucesso", "Cadastro efetuado com sucesso!");
         return "redirect:/cadastro/dosagem";
     }
 
