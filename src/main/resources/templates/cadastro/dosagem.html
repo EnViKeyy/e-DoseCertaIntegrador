@@ -156,34 +156,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 <div class="panel panel-widget agile-validation">
                                     <div class="my-div">
                                         <th:block th:include="mensagens"/>
-                                        <form method="post" action="/cadastro/dosagem" class="valida" autocomplete="off" novalidate="novalidate">
+                                        <form method="get" action="/cadastro/dosagem1" class="valida" autocomplete="off" novalidate="novalidate">
 
                                             <div class="input-info">
                                                 <h3>Informe os Dados</h3>
                                             </div>
 
-                                            <h4>Fármaco</h4>
-                                            <label for="animalId">Fármaco &nbsp;<span class="at-required-highlight"></span></label>
-                                            <div class="form-group">
-                                                <select name="farmacoId" id="farmacoId" required="true" class="form-control">
-                                                    <option>Selecione um fármaco...</option>
-                                                    <option th:each="farmaco : ${farmacos}" th:value="${farmaco.farmacoId}" th:text="${farmaco.nome}" ></option>                                                </select>
-                                            </div>
-
                                             <h4>Animal</h4>
                                             <label for="animalId">animal &nbsp;<span class="at-required-highlight"></span></label>
                                             <div class="form-group">
-                                                <select name="animalId" id="animalId" required="true" class="form-control">
+                                                <select name="animalId" id="animalId" required="true" class="form-control" >
                                                     <option>Selecione um animal...</option>
                                                     <option th:each="animal : ${animais}" th:value="${animal.animalId}" th:text="${animal.nome}" ></option>
                                                 </select>
-                                            </div>
-
-                                            <label for="peso">Peso do animal &nbsp;<span class="at-required-highlight"></span></label>
-                                            <div class="form-group">
-                                                <input type="text" name="peso" id="peso" required="" 
-                                                       class="form-control" data-required="Campo obrigatório!"
-                                                       placeholder="Peso em Kg" pattern="[0-9]*" />
                                             </div>
 
                                             <hr/>
@@ -267,7 +252,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <script src="/js/validator.min.js"></script>
         <!--//validator js-->
         <script src="/js/proton.js"></script>
-        
+
         <!-- BEGIN JIVOSITE CODE {literal} -->
         <script type='text/javascript'>
             (function () {

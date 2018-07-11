@@ -2,7 +2,6 @@ package br.unicentro.e_dosecerta.controllers;
 
 import br.unicentro.e_dosecerta.models.Animal;
 import br.unicentro.e_dosecerta.models.Dosagem;
-import br.unicentro.e_dosecerta.models.Especie;
 import br.unicentro.e_dosecerta.models.Farmaco;
 import br.unicentro.e_dosecerta.models.FarmacoEspecie;
 import br.unicentro.e_dosecerta.models.FarmacoEspeciePK;
@@ -20,6 +19,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -46,40 +46,42 @@ public class DosagemController {
     @RequestMapping(value = "/cadastro/dosagem", method = RequestMethod.GET)
     private ModelAndView cadastroDosagem() {
         ModelAndView mv = new ModelAndView("cadastro/dosagem");
-
         Iterable<Animal> animais = animalRpt.findAll();
         mv.addObject("animais", animais);
-
-        Iterable<Farmaco> farmacos = farmacoRpt.findAll();
-        mv.addObject("farmacos", farmacos);
-
         return mv;
     }
 
-    @RequestMapping(value = "/cadastro/dosagem", method = RequestMethod.POST)
-    private String cadastroDosagem(@Valid Dosagem dosagem, BindingResult result, RedirectAttributes attributes) {
-        if (result.hasErrors()) {
-            attributes.addFlashAttribute("falha", "Campos obrigatórios não preenchidos!");
-            return "redirect:/cadastro/dosagem";
-        }
+    @RequestMapping(value = "/cadastro/dosagem1", method = RequestMethod.GET)
+    private ModelAndView cadastroDosagem2(Animal animal) {
+        ModelAndView mv = new ModelAndView("cadastro/dosagem1");
+        List<Farmaco> farmacos = new ArrayList<>();
+        Farmaco farmaco;
+        animal = animalRpt.findByAnimalId(animal.getAnimalId());
 
-        Float dose;
-        Animal animal = animalRpt.findByAnimalId(dosagem.getAnimalId());
+        Iterable<FarmacoEspecie> farmacoEsps = farmacoEspRpt.findByEspecieId(animal.getEspecieId());
+        for (FarmacoEspecie farmacoEsp : farmacoEsps) {
+            farmaco = farmacoRpt.findByFarmacoId(farmacoEsp.getFarmacoEspeciePK().getFarmacoId());
+            farmacos.add(farmaco);
+        }
+        mv.addObject("farmacos", farmacos);
+        return mv;
+    }
+
+    @RequestMapping(value = "/cadastro/dosagem1", method = RequestMethod.POST)
+    private String cadastroDosagem1(Dosagem dosagem, Animal animal) {
         Farmaco farmaco = farmacoRpt.findByFarmacoId(dosagem.getFarmacoId());
-        Especie especie = especieRpt.findByEspecieId(animal.getEspecieId());
-
-        FarmacoEspeciePK farmacoEspPK = new FarmacoEspeciePK();
-        farmacoEspPK.setEspecieId(animal.getEspecieId());
-        farmacoEspPK.setFarmacoId(dosagem.getFarmacoId());
-        FarmacoEspecie farmacoEsp = farmacoEspRpt.findByFarmacoEspecieId(farmacoEspPK);
-        if (farmacoEsp == null) {
-            attributes.addFlashAttribute("falha", "Não é possível à administração de " + farmaco.getNome() + " para animais da espécie " + especie.getNome());
-            return "redirect:/cadastro/dosagem";
-        }
-
+        Float dose;
+        
+        dosagem.setAnimalId(animal.getAnimalId());
         dosagem.setData(new Date());
         dosagem.setVeterinarioId(new VeterinarioController().veterinarioAutenticado().getVeterinarioId());
 
+        FarmacoEspecie farmacoEsp = farmacoEspRpt.findByFarmacoId(farmaco.getFarmacoId());
+        dosagem.setData(new Date());
+        dosagem.setVeterinarioId(new VeterinarioController().veterinarioAutenticado().getVeterinarioId());
+        System.out.println(dosagem.getPeso());
+        System.out.println(farmacoEsp.getDoseMaxima());
+        System.out.println(farmaco.getConcentracao());
         dose = (dosagem.getPeso() * farmacoEsp.getDoseMaxima()) / farmaco.getConcentracao();
         dosagem.setDosagem(dose);
         dosagemRpt.save(dosagem);
@@ -107,9 +109,8 @@ public class DosagemController {
         dose2.setPeso(dosagem.getPeso());
         dose2.setVeterinarioId(dosagem.getVeterinarioId());
         dosagemRpt.save(dose2);
-        
-        attributes.addFlashAttribute("sucesso", "Cadastro efetuado com sucesso!");
-        return "redirect:/cadastro/dosagem";
+
+        return "redirect:/consulta/dosagem";
     }
 
     @RequestMapping(value = "/consulta/dosagem", method = RequestMethod.GET)
